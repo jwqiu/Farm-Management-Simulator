@@ -1,0 +1,206 @@
+{% extends "Base.html" %}
+
+{% block title %}Stock List{% endblock %}
+
+{% block header %}
+<section id="breadcrumb" class="bg-white">
+    <div class="container col-10 col-md-8 mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{url_for('home')}}">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Stock List</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+
+<section id="Stock" class="bg-light">
+    <div class="container col-10 col-md-8 py-5">
+        <div class="text-start">
+            <h2>Stock list</h2>
+            <p class="lead text-muted">Detail information about Your Stock</p>
+            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Well,you didn't ask for an add-stock function, so I didn't make it.....">
+                <button class="btn btn-secondary" disabled >Add New Stock</button>
+            </span>
+        </div>
+        <div>
+            <ul class="nav nav-tabs mt-5">
+                {% for mob in mobs %}
+                    <li class="nav-item">
+                    <a class="nav-link {% if loop.first %}active{% endif %}" data-bs-toggle="tab" href="#{{mob[0]}}">{{mob[1]}}</a>
+                    </li>
+                {% endfor %}
+                <!-- <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="tab" href="#Mob2">Mob2</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="tab" href="#Mob3">Mob3</a>
+                </li> -->
+            </ul>
+        </div>
+
+
+        {% for mob in mobs%}
+        <div class="mt-5 tab-content">
+            <div class="tab-pane fade {% if loop.first %}show active{% endif %} table-responsive" id="{{mob[0]}}">
+                <div class="container mb-5 text-center ">
+                    <div class="row d-flex justify-content-start align-items-center">
+                        <div class="col-4 col-lg-3 ps-0">
+                            <div class="shadow py-3">
+                                <p>Paddock Name:</p>
+                                <h4 class="">{{mob[3]}}</h4>
+                            </div>
+                        </div>
+                        <div class="col-4 col-lg-3 ps-0">
+                            <div class="shadow py-3">
+                                <p>Number of Stock:</p>
+                                <h4 class="">{{mob[2]}}</h4>
+                            </div>
+                        </div>
+                        <div class="col-4 col-lg-3 ps-0">
+                            <div class="shadow py-3">
+                                <p>Average Weight:</p>
+                                <h4 class="">{{mob[4]}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table text-center table-hover" >
+                    <thead>
+                        <tr class="table-secondary align-middle">
+                            <th>Stockid</th>
+                            <th>Weight</th>
+                            <th>birth<br>date</th>
+                            <th>Mob<br>id</th>
+                            <th>Mob<br>Name</th>
+                            <th>Paddock<br>id</th>
+                            <th>Paddock<br>Name</th>
+                            <th>Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for stock in updated_stocks %}
+                            {% if stock[4]==mob[1] %}
+                        <tr>
+                            <td>{{stock[0]}}</td>
+                            <td>{{stock[1]}}</td>
+                            <td>{{stock[2]}}</td>
+                            <td>{{stock[3]}}</td>
+                            <td>{{stock[4]}}</td>
+                            <td>{{stock[5]}}</td>
+                            <td>{{stock[6]}}</td>
+                            <td>{{stock[7]}}</td>
+                        </tr>
+                            {% endif %}
+                        {% endfor%}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endfor%}
+
+            <!-- <div class="tab-pane fade" id="Mob2">
+                <div class="container mb-5 text-center ">
+                    <div class="row d-flex justify-content-start align-items-center">
+                        <div class="col-4 col-lg-3 ps-0">
+                            <div class=" shadow">
+                                <p>Paddock Name</p>
+                                <h4>xxx</h4>
+                            </div>
+                        </div>
+                        <div class="col-4 col-lg-3 ps-0">
+                            <div class=" shadow">
+                                <p>number of stock</p>
+                                <h4>xxx</h4>
+                            </div>
+                        </div>
+                        <div class="col-4 col-lg-3 ps-0">
+                            <div class=" shadow">
+                                <p>average weight</p>
+                                <h4>xxx</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table" >
+                    <thead>
+                        <tr class="table-secondary">
+                            <th>id</th>
+                            <th>Weight</th>
+                            <th>age</th>
+                            <th>Paddock Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>3</th>
+                            <th>423</th>
+                            <th>1</th>
+                            <th>grass1</th>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>456</td>
+                            <td>1</td>
+                            <td>grass2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> -->
+            
+            <!-- <div class="tab-pane fade" id="Mob3">
+                <div class="container mb-5 text-center ">
+                    <div class="row d-flex justify-content-start align-items-center">
+                        <div class="col-4 col-lg-3 ps-0">
+                            <div class=" shadow">
+                                <p>Paddock Name</p>
+                                <h4>xxx</h4>
+                            </div>
+                        </div>
+                        <div class="col-4 col-lg-3 ps-0">
+                            <div class=" shadow">
+                                <p>number of stock</p>
+                                <h4>xxx</h4>
+                            </div>
+                        </div>
+                        <div class="col-4 col-lg-3 ps-0">
+                            <div class=" shadow">
+                                <p>average weight</p>
+                                <h4>xxx</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table" >
+                    <thead>
+                        <tr class="table-secondary">
+                            <th>id</th>
+                            <th>Weight</th>
+                            <th>age</th>
+                            <th>Paddock Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>5</th>
+                            <th>234</th>
+                            <th>2</th>
+                            <th>grass1</th>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>256</td>
+                            <td>1</td>
+                            <td>grass2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> -->
+
+    </div>
+</section>
+
+{% endblock %}

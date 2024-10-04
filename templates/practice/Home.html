@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>FMS</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body class="p-0 m-0 border-0 m-0 border-0">      
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="d-flex flex-column justify-content-center ">
+                <h4>Farm Management Simulator</h4>
+                <p class="small text-muted mb-0 ">Hello there, Today is Friday</p>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link" href="#">Stock</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mobs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Paddocks</a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+    <section id="Stock" class="bg-white mt-5">
+        <div class="container-lg">
+            <div class="text-center">
+                <h2>Overview of Stock</h2>
+                <p class="lead text-muted">Key Metrics for Stock Management</p>
+            </div>
+        </div>
+
+        <div class="row my-5 align-items-center justify-content-center mx-auto col-10">
+            <div class="col-6 col-lg-2">
+                <div class="card shadow border-1 mb-2">
+                    <div class="card-body text py-1">
+                        <p class="display-5 my-4 text-center fw-bold">50</p>
+                        <p class="lead card-subtitle text-center mb-3">Total Cows</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="card shadow border-1 mb-2">
+                    <div class="card-body text py-1">
+                        <p class="display-5 my-4 text-center fw-bold">353</p>
+                        <p class="lead card-subtitle text-center mb-3">Average Weight</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="card shadow border-1 mb-2">
+                    <div class="card-body text py-1">
+                        <p class="display-5 my-4 text-center fw-bold">1.42</p>
+                        <p class="lead card-subtitle text-center mb-3">Average Age</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="card shadow border-1 mb-2">
+                    <div class="card-body text py-1">
+                        <p class="display-5 my-4 text-center fw-bold">5</p>
+                        <p class="lead card-subtitle text-center mb-3">UnderWeight</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-10 text-center mx-auto">
+            <a href="/">Check Stock in Details</a>
+        </div>
+    </section>
+
+    <section id="Paddocks" class="bg-light mt-5 py-5">
+        <div class="container-lg">
+            <div class="text-center">
+                <h2>Overview of Paddocks</h2>
+                <p class="lead text-muted">Pasture Level for Each Paddocks (kg DM/ha)</p>
+            </div>
+        </div>
+
+        <div class="row my-5 align-items-center justify-content-center mx-auto col-10">
+            <div class="col-8 col-lg-3">
+                <div class="card-header text-center"></div>
+                <div class="card shadow border-0 mb-2">
+                    <div class="card-body text-center py-4">
+                        <h4 class="card-title mb-4">Stream 1</h4>
+                        <p class="display-5 text-center fw-bold  text-danger mb-0">1500</p>
+                        <p class="small text-center"><i class="bi bi-caret-down-fill me-1"></i>60 per day</p>
+                        <p class="small text-center mt-5 mb-0">Regrow can be affected</p>
+                        <a href="/" class="btn btn-outline-danger mt-3">Moving Mobs Now!</a>
+                        <!-- <p class="small text-center mt-5 mb-2">60 / day</p> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 col-lg-3">
+                <div class="card shadow border-0 mb-2">
+                    <div class="card-body text-center py-4">
+                        <h4 class="card-title mb-4">Rear 1</h4>
+                        <p class="display-5 text-center fw-bold mb-0">2300</p>
+                        <p class="small text-center"><i class="bi bi-caret-down-fill me-1"></i>15 per day</p>
+                        <!-- <p class="small text-center mt-5 mb-2"></p> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 col-lg-3">
+                <div class="card shadow border-0 mb-2">
+                    <div class="card-body text-center py-4">
+                        <h4 class="card-title mb-4">Rear 2</h4>
+                        <p class="display-5 text-center fw-bold mb-0">1900</p>
+                        <p class="small text-center"><i class="bi bi-caret-up-fill me-1"></i>110 per day</p>
+                        <!-- <p class="small text-center mt-5 mb-2"></p> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 col-lg-3">
+                <div class="card shadow border-0 mb-2">
+                    <div class="card-body text-center py-4">
+                        <h4 class="card-title mb-4">Barn</h4>
+                        <p class="display-5 text-center fw-bold  text-warning mb-0">1750</p>
+                        <p class="small text-center"><i class="bi bi-caret-down-fill me-1"></i>35 per day</p>
+                        <p class="small text-center mt-5 mb-2"><i class="bi bi-exclamation-circle me-1"></i>Drop below 1500 in 5 days</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-10 text-center mx-auto">
+            <a class="ms-2" href="/">Check Paddocks in Detail</a>
+        </div>
+
+    </section>
+    
+  </body>
+</html>

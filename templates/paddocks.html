@@ -1,9 +1,98 @@
-{% extends "base.html" %}
+{% extends "Base.html" %}
 
-{% block title %}Paddocks{% endblock %}
+{% block title %}Paddocks List{% endblock %}
+
+{% block header %}
+<section id="breadcrumb" class="bg-white">
+    <div class="container col-10 col-md-8 mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{url_for('home')}}">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Paddocks List</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+{% endblock %}
 
 {% block content %}
 
-<p>Paddocks</p>
+<section id="table" class="bg-light">
+    <div class="container col-10 col-md-8 py-5">
+        <div class="text-start">
+            <h2>Paddocks List</h2>
+            <p class="lead text-muted">Current Paddocks and Management</p>
+            <a href="{{ url_for('add_paddock') }}" class="btn btn-success">Add New Paddock</a>
+            <a href="{{ url_for('nextday') }}" class="btn btn-success ms-3">Move to next day</a>
+            <a href="{{ url_for('reset_date') }}" class="ms-3">Clear date</a>
+
+        </div>
+        <div class="mt-5 table-responsive">
+            <table class="table text-center table-hover">
+                <thead>
+                    <tr class="table-secondary text-nowrap align-middle">
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Area</th>
+                        <th>Dm/ha</th>
+                        <th>Total<br>Dm</th>
+                        <th>Mob<br>Name</th>
+                        <th>Stock<br>Number</th>
+                        <th>Total_dm<br>Change</th>
+                        <th data-bs-toggle="tooltip" data-bs-placement="top" title="if you don't move mob from current paddock, how many days the Dm/ha will drop below 1500" ><i class="bi bi-exclamation-circle me-1"></i>Falls below<br>1500 in</th>
+                        <th>Management</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for paddock in updated_Paddocks %}
+                    <tr class=" align-middle
+                        {% if paddock[3] <=1500 %}
+                            table-danger
+                        {% elif paddock[3] <=1800 %}
+                            table-warning
+                        {% endif %}
+                    ">
+                        <td>{{paddock[0]}}</td>
+                        <td class="text-nowrap">{{paddock[1]}}</td>
+                        <td>{{paddock[2]}}</td>
+                        <td>{{paddock[3]|int}}</td>
+                        <td>{{paddock[4]|int}}</td>
+                        <td class="text-nowrap">{{paddock[5]|default('',true)}}</td>
+                        <td>{{paddock[7]|default('',true)}}</td>
+                        <td>{{paddock[8]|int}}/day</td>
+                        <td class="text-nowrap">
+                            {% if paddock[9] %}
+                                {{paddock[9]}} days
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        
+                        <td class="text-nowrap ">
+                             <div class="d-flex justify-content-center gap-3">
+                                <a href="{{ url_for('edit_paddock',id=paddock[0])}}" class="btn btn-light border">Edit</a>
+                                {% if paddock[6] %}
+                                <form action="{{url_for('delete_paddock')}}" method="POST" onsubmit="return confirm('Are you sure you want to delete this paddock?');">
+                                    <input type="hidden" name="paddock_id" value="{{paddock[0]}}">
+                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="you can't delete this poddock because there is a mob in it so far">
+                                        <button type="submit" class="btn btn-light border" disabled >Delete</button>
+                                    </span>
+                                </form>
+                                {% else %}
+                                <form action="{{url_for('delete_paddock')}}" method="POST" onsubmit="return confirm('Are you sure you want to delete this paddock?');">
+                                    <input type="hidden" name="paddock_id" value="{{paddock[0]}}">
+                                    <button type="submit" class="btn btn-light border">Delete</button>
+                                </form>
+                                {% endif %}
+                                <a class="btn btn-light border" href="{{ url_for('move_mob',from=request.path) }}" >Move Mob</a>
+                             </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
 
 {% endblock %}

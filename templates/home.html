@@ -1,11 +1,141 @@
-{% extends "base.html" %}
+{% extends "Base.html" %}
 
-{% block title %}FMS - Home{% endblock %}
+{% block title %}Home/Dashboard{% endblock %}
+
 
 {% block content %}
 
-<p>Home:  Add some brief text and an image here </p>
+<section id="Stock" class="bg-white mt-5">
+    <div class="container-lg">
+        <div class="text-center">
+            <h2>Overview of Stock</h2>
+            <p class="lead text-muted">Key Metrics for Stock Management</p>
+        </div>
+    </div>
 
+    <div class="row my-5 align-items-center justify-content-center mx-auto col-10">
+        <div class="col-6 col-lg-2">
+            <div class="card shadow border-1 mb-2 hover-effect">
+                <div class="card-body text py-1">
+                    <p class="display-5 my-4 text-center fw-bold text-success">{{totalcows[0]|int}}</p>
+                    <p class="lead card-subtitle text-center mb-3 text-nowrap">Total<br>Cows</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-2">
+            <div class="card shadow border-1 mb-2 hover-effect">
+                <div class="card-body text py-1">
+                    <p class="display-5 my-4 text-center fw-bold text-nowrap text-success">{{avgweight[0]|int}}</p>
+                    <p class="lead card-subtitle text-center mb-3 text-nowrap">Average<br>Weight</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-2">
+            <div class="card shadow border-1 mb-2 hover-effect">
+                <div class="card-body text py-1">
+                    <p class="display-5 my-4 text-center fw-bold text-success">{{avg_age|round(1)}}</p>
+                    <p class="lead card-subtitle text-center mb-3 text-nowrap">Average<br>Age</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-2">
+            <div class="card shadow border-1 mb-2 hover-effect" data-bs-toggle="tooltip" data-bs-placement="top" title="Num of stock age over 1 year and weigh less than 300kg"  >
+                <div class="card-body text py-1">
+                    <p class="display-5 my-4 text-center fw-bold text-success">{{underweight}}</p>
+                    <p class="lead card-subtitle text-center mb-3 text-nowrap">Under<br>Weight</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-10 text-center mx-auto">
+        <a href="{{url_for('stock')}}">Check Stock in Details</a>
+    </div>
+</section>
+
+<section id="Paddocks" class="bg-light mt-5 py-5">
+    <div class="container-lg">
+        <div class="text-center">
+            <h2>Overview of Paddocks</h2>
+            <p class="lead text-muted">Pasture Level for Each Paddocks (kg DM/ha)</p>
+        </div>
+    </div>
+
+    <div class="row my-5 align-items-start justify-content-center mx-auto col-10">
+        {% for paddock in updated_Paddocks%}
+        <div class="col-8 col-lg-3 mb-4">
+            <div class="card-header text-center"></div>
+            <div class="card shadow border-1 mb-2 hover-effect">
+                <div class="card-body text-center py-5">
+                    <h4 class="card-title mb-4">{{paddock[1]}}</h4>
+                    <p class="display-5 text-center 
+                    {% if paddock[3]<=1500 %}
+                        text-danger
+                    {% elif paddock[3]<=1800 %}
+                        text-warning
+                    {% endif %}
+                        text-success
+                    fw-bold  mb-0">{{paddock[3]}}</p>
+                    <p class="small text-center">
+                        {% if paddock[8]>=0 %}
+                            <i class="bi bi-caret-up-fill me-1"></i>
+                        {% else%}
+                            <i class="bi bi-caret-down-fill me-1"></i>
+                        {% endif%}
+                        {{paddock[8]}} per day</p>
+                    <!-- <p class="small text-center mt-5 mb-2">60 / day</p> -->
+                </div>
+            </div>
+            <div class="d-flex flex-column">
+                {% if paddock[3]<=1500 and paddock[6] %}
+                    <a href="{{url_for('mobs')}}" class="btn btn-outline-danger mt-3">Moving Mobs Now!</a>
+                    <p class="small text-center mt-3 mb-3"><i class="bi bi-exclamation-circle me-1"></i>Regrow can be affected</p>
+                {% elif paddock[3]<=1800 and paddock[8]<0 %}
+                    <p class="small text-center mt-3 mb-2" data-bs-toggle="tooltip" data-bs-placement="top" title="if you don't move mob from current paddock, how many days the Dm/ha will drop below 1500" ><i class="bi bi-exclamation-circle me-1"></i>Drop below 1500 in {{paddock[9]}} days</p>
+                {% elif paddock[8]<0 %}
+                    <p class="small text-center mt-3 mb-2" data-bs-toggle="tooltip" data-bs-placement="top" title="if you don't move mob from current paddock, how many days the Dm/ha will drop below 1500" ><i class="bi bi-exclamation-circle me-1"></i>Drop below 1500 in {{paddock[9]}} days</p>
+                {% endif %}
+            </div>
+        </div>
+
+        {% endfor%}
+        <!-- <div class="col-8 col-lg-3">
+            <div class="card shadow border-0 mb-2">
+                <div class="card-body text-center py-4">
+                    <h4 class="card-title mb-4">Rear 1</h4>
+                    <p class="display-5 text-center fw-bold mb-0">2300</p>
+                    <p class="small text-center"><i class="bi bi-caret-down-fill me-1"></i>15 per day</p>
+                    <p class="small text-center mt-5 mb-2"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-8 col-lg-3">
+            <div class="card shadow border-0 mb-2">
+                <div class="card-body text-center py-4">
+                    <h4 class="card-title mb-4">Rear 2</h4>
+                    <p class="display-5 text-center fw-bold mb-0">1900</p>
+                    <p class="small text-center"><i class="bi bi-caret-up-fill me-1"></i>110 per day</p>
+                    <p class="small text-center mt-5 mb-2"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-8 col-lg-3">
+            <div class="card shadow border-0 mb-2">
+                <div class="card-body text-center py-4">
+                    <h4 class="card-title mb-4">Barn</h4>
+                    <p class="display-5 text-center fw-bold  text-warning mb-0">1750</p>
+                    <p class="small text-center"><i class="bi bi-caret-down-fill me-1"></i>35 per day</p>
+                    <p class="small text-center mt-5 mb-2"><i class="bi bi-exclamation-circle me-1"></i>Drop below 1500 in 5 days</p>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="col-10 text-center mx-auto my-4">
+        <a class="ms-2" href="{{url_for('paddocks')}}">Check Paddocks in Detail</a>
+    </div>
+
+</section>
 
 
 {% endblock %}

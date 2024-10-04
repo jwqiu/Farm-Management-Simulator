@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    <title>Stock List</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body class="p-0 m-0 border-0 m-0 border-0">      
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="d-flex flex-column justify-content-center ">
+                <h4>Farm Management Simulator</h4>
+                <p class="small text-muted mb-0 ">Hello there, Today is Friday</p>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link" href="#">Stock</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mobs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Paddocks</a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="breadcrumb" class="bg-white">
+        <div class="container col-8 mt-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="/">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Stock List</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <section id="Stock" class="bg-light">
+        <div class="container col-8 py-5">
+            <div class="text-start">
+                <h2>Stock list</h2>
+                <p class="lead text-muted">Detail information about Your Stock</p>
+                <button class="btn btn-secondary ">Add New Stock</button>
+            </div>
+            <div>
+                <ul class="nav nav-tabs mt-5">
+                    <li class="nav-item">
+                      <a class="nav-link active" data-bs-toggle="tab" aria-current="page" href="#Mob1">Mob1</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-bs-toggle="tab" href="#Mob2">Mob2</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-bs-toggle="tab" href="#Mob3">Mob3</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-5 tab-content">
+                <div class="tab-pane fade show active" id="Mob1">
+                    <div class="container mb-5 text-center ">
+                        <div class="row d-flex justify-content-start align-items-center">
+                            <div class="col-4 col-lg-3 ps-0">
+                                <div class=" shadow">
+                                    <p>Paddock Name</p>
+                                    <h4>xxx</h4>
+                                </div>
+                            </div>
+                            <div class="col-4 col-lg-3 ps-0">
+                                <div class=" shadow">
+                                    <p>number of stock</p>
+                                    <h4>xxx</h4>
+                                </div>
+                            </div>
+                            <div class="col-4 col-lg-3 ps-0">
+                                <div class=" shadow">
+                                    <p>average weight</p>
+                                    <h4>xxx</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table" >
+                        <thead>
+                            <tr class="table-secondary">
+                                <th>id</th>
+                                <th>Weight</th>
+                                <th>age</th>
+                                <th>Paddock Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>1</th>
+                                <th>344</th>
+                                <th>3</th>
+                                <th>grass1</th>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>355</td>
+                                <td>2</td>
+                                <td>grass2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-pane fade" id="Mob2">
+                    <div class="container mb-5 text-center ">
+                        <div class="row d-flex justify-content-start align-items-center">
+                            <div class="col-4 col-lg-3 ps-0">
+                                <div class=" shadow">
+                                    <p>Paddock Name</p>
+                                    <h4>xxx</h4>
+                                </div>
+                            </div>
+                            <div class="col-4 col-lg-3 ps-0">
+                                <div class=" shadow">
+                                    <p>number of stock</p>
+                                    <h4>xxx</h4>
+                                </div>
+                            </div>
+                            <div class="col-4 col-lg-3 ps-0">
+                                <div class=" shadow">
+                                    <p>average weight</p>
+                                    <h4>xxx</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table" >
+                        <thead>
+                            <tr class="table-secondary">
+                                <th>id</th>
+                                <th>Weight</th>
+                                <th>age</th>
+                                <th>Paddock Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>3</th>
+                                <th>423</th>
+                                <th>1</th>
+                                <th>grass1</th>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>456</td>
+                                <td>1</td>
+                                <td>grass2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="tab-pane fade" id="Mob3">
+                    <div class="container mb-5 text-center ">
+                        <div class="row d-flex justify-content-start align-items-center">
+                            <div class="col-4 col-lg-3 ps-0">
+                                <div class=" shadow">
+                                    <p>Paddock Name</p>
+                                    <h4>xxx</h4>
+                                </div>
+                            </div>
+                            <div class="col-4 col-lg-3 ps-0">
+                                <div class=" shadow">
+                                    <p>number of stock</p>
+                                    <h4>xxx</h4>
+                                </div>
+                            </div>
+                            <div class="col-4 col-lg-3 ps-0">
+                                <div class=" shadow">
+                                    <p>average weight</p>
+                                    <h4>xxx</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table" >
+                        <thead>
+                            <tr class="table-secondary">
+                                <th>id</th>
+                                <th>Weight</th>
+                                <th>age</th>
+                                <th>Paddock Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>5</th>
+                                <th>234</th>
+                                <th>2</th>
+                                <th>grass1</th>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>256</td>
+                                <td>1</td>
+                                <td>grass2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+    </section>

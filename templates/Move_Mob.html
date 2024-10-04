@@ -1,0 +1,72 @@
+{% extends "Base.html" %}
+
+{% block title %}Move Mob{% endblock %}
+
+{% block header %}
+<section id="breadcrumb" class="bg-white">
+    <div class="container col-10 col-md-8 mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{from_page}}">{{ from_page.replace('/', '') }}</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Move Mob</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<section id="table" class="bg-light">
+    <div class="container ol-10 col-md-8 py-5">
+        <!-- <div class="text-start" > -->
+            <h2>Move Mob</h2>
+            <p class="lead text-muted">Move mob from one paddock to another one</p>
+            <div class="bg-white p-5 mb-5">
+                <form method="POST" class="d-flex flex-column" action="{{url_for('move_mob_submit')}}">
+                    <label class="mb-2 fs-3">Choose target Mob</label>
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                        {% for mob in mobnpaddock%}
+                            {% if mob[5]%}
+                                <input type="radio" value="{{mob[6]}}" class="btn-check" name="mobid" id="mobid_{{mob[6]}}" autocomplete="off" >
+                                <label class="btn btn-outline-success" for="mobid_{{mob[6]}}">{{mob[5]}}</label>
+                            {% else%}
+
+                            {% endif%}
+                        
+                        {% endfor %}
+                        <!-- <input type="radio" value="mob2" class="btn-check" name="Choose_target_Mob" id="mob2" autocomplete="off">
+                        <label class="btn btn-outline-success" for="mob2">mob 2</label>
+                          
+                        <input type="radio" value="mob3" class="btn-check" name="Choose_target_Mob" id="mob3" autocomplete="off">
+                        <label class="btn btn-outline-success" for="mob3">mob 3</label> -->
+                    </div>
+                    <label class="mt-5 mb-2 fs-3">Choose available paddock</label>
+                    <p class="text-muted"><i class="bi bi-exclamation-circle me-2"></i>If you see any buttons in grey, it means those paddocks are currently occupied</p>
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                        {% for paddock in mobnpaddock%}
+                            {% if paddock[5]%}
+                                <input type="radio" value="{{paddock[0]}}" class="btn-check" name="paddock_id" id="paddock_id_{{paddock[0]}}" autocomplete="off" disabled>
+                                <label class="btn btn-outline-secondary" for="paddock_id_{{paddock[0]}}">{{paddock[1]}}</label>
+                            {% else %}
+                                <input type="radio" value="{{paddock[0]}}" class="btn-check" name="paddock_id" id="paddock_id_{{paddock[0]}}" autocomplete="off" >
+                                <label class="btn btn-outline-success" for="paddock_id_{{paddock[0]}}">{{paddock[1]}}</label>
+                            {% endif%}
+                        
+                        {% endfor%}
+                        <!-- <input type="radio" value="grass2" class="btn-check" name="Choose_target_paddock" id="grass2" autocomplete="off">
+                        <label class="btn btn-outline-success" for="grass2">grass 2</label>
+                          
+                        <input type="radio" value="grass3" class="btn-check" name="Choose_target_paddock" id="grass3" autocomplete="off">
+                        <label class="btn btn-outline-success" for="grass3">grass 3</label> -->
+                    </div>
+                    <div>
+                        <input type="hidden" name="from_page" value="{{from_page}}">
+                        <button class="btn btn-success mt-5" type="submit">Move Mob</button>
+                    </div>
+                </form>
+            </div>
+        <!-- </div> -->
+    </div>
+</section>
+{% endblock %}

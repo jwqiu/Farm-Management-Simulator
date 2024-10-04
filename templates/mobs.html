@@ -1,12 +1,63 @@
-{% extends "base.html" %}
+{% extends "Base.html" %}
 
-{% block title %}Mobs{% endblock %}
+{% block title %}Mobs List{% endblock %}
+
+
+{% block header %}
+<section id="breadcrumb" class="bg-white">
+    <div class="container col-8 mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{url_for('home')}}">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Mobs List</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+{% endblock %}
 
 {% block content %}
 
-<h2>Mobs</h2>
+<!-- <h2>Mobs</h2> -->
+<section id="table" class="bg-light">
+    <div class="container col-8 py-5">
+        <div class="text-start">
+            <h2>Mobs List</h2>
+            <p class="lead text-muted">Key Metrics for Mobs Management</p>
+            <a href="{{ url_for('move_mob',from=request.path) }}" class="btn btn-success">Move Mobs</a>
+        </div>
+        <div class="mt-5">
+            <table class="table text-center table-hover">
+                <thead>
+                    <tr class="table-secondary align-middle">
+                        <th>Mob ID</th>
+                        <th>Mob Name</th>
+                        <th>Stock Number</th>
+                        <th>Paddock Name</th>
+                        <th>Dm/ha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mob in mobs%}
+                        {% if mob[6] %}
+                    <tr>
+                        <td>{{mob[6]}}</td>
+                        <td>{{mob[5]}}</td>
+                        <td>{{mob[7]}}</td>
+                        <td>{{mob[1]}}</td>
+                        <td>{{mob[3]}}</td>
+                    </tr>
+                        {% else %}
 
-    <table>   
+                        {% endif %}
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+    <!-- <table>   
         <tr>
             <th>Mob ID</th>
             <th>Mob Name</th>
@@ -17,6 +68,6 @@
                 <td>{{mob[1]}}</td>  
             </tr>
         {% endfor %}    
-    </table>
+    </table> -->
 
 {% endblock %}

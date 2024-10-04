@@ -1,0 +1,45 @@
+{% extends "Base.html" %}
+
+{% block title %}Add Paddock{% endblock %}
+
+{% block header %}
+<section id="breadcrumb" class="bg-white">
+    <div class="container col-10 col-md-8 mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item"><a href="/paddocks">Paddocks List</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Add Paddock</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<section id="table" class="bg-light">
+    <div class="container col-10 col-lg-8 py-5">
+        <!-- <form class="text-start" > -->
+            <h2>Add Paddock</h2>
+            <p class="lead text-muted">Add a new paddock in your farm</p>
+            <div class="bg-white p-5 mb-5">
+                <div class="row">
+                    <div>
+                        <form class="d-flex flex-column" method="POST" action="{{url_for('add_paddock_submit')}}">
+                            <label for="paddock_name" class="form-label">Paddock Name</label>
+                            <input type="text" class="form-control" name="paddock_name" id="paddock_name">
+                            <label for="area" class="form-label mt-5">Area</label>
+                            <input type="text" class="form-control" name="area" id="area">
+                            <label for="dm_ha" class="form-label mt-5">dm/ha</label>
+                            <input type="text" class="form-control " name="dm_ha" id="dm_ha">
+                            <div>
+                                <button class="btn btn-success mt-5">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <!-- </form> -->
+    </div>
+</section>
+{% endblock %}
