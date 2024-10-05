@@ -11,6 +11,7 @@ CREATE TABLE paddocks (
 	PRIMARY KEY (id)
 );
 
+
 INSERT INTO paddocks VALUES
 	(1, "Stream 1", 1.22, 1500, 1.22*1500),
 	(4, "Rear 1", 1.23, 2300, 1.23*2300),
