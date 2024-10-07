@@ -79,4 +79,9 @@ INSERT INTO stock VALUES
 	(1025, 1, '2022-09-03', 558.3),
 	(1026, 7, '2023-09-24', 288.1);
     
-    
+CREATE TABLE curr_date(
+	curr_date date NOT NULL
+);
+
+INSERT INTO curr_date VALUES
+	('2024-10-29');

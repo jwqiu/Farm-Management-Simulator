@@ -33,13 +33,19 @@ def getCursor():
    
     return cursor
 
+def get_date():
+    Connection=getCursor()
+    qstr0="SELECT * FROM fms.curr_date;"
+    Connection.execute(qstr0)
+    curr_date=Connection.fetchone()[0]
+    return curr_date
+
 @app.route("/")
 def home():
 
-    if 'curr_date' not in session:
-        session.update({'curr_date': start_date.strftime('%Y-%m-%d')})
-    
-    Connection=getCursor()
+    curr_date=get_date()
+
+    Connection=getCursor()  
     qstr1="SELECT count(*) FROM fms.stock;"
     qstr2="SELECT round(avg(weight),0) FROM fms.stock;"
     Connection.execute(qstr1)
@@ -102,7 +108,7 @@ def home():
         new_paddock.append(days)
         updated_Paddocks.append(new_paddock)
 
-    return render_template("home.html",totalcows=totalcows,avgweight=avgweight,avg_age=avg_age,underweight=underweight,updated_Paddocks=updated_Paddocks)
+    return render_template("home.html",curr_date=curr_date,totalcows=totalcows,avgweight=avgweight,avg_age=avg_age,underweight=underweight,updated_Paddocks=updated_Paddocks)
 
 @app.route("/clear-date")
 def clear_date():
@@ -112,21 +118,21 @@ def clear_date():
 
 @app.route("/reset-date")
 def reset_date():
-    """Reset session['curr_date'] to the project start_date value."""
-    session.update({'curr_date': start_date.strftime('%Y-%m-%d')})
+    # session.update({'curr_date': start_date.strftime('%Y-%m-%d')})
+    Connection=getCursor()  
+    with open('fms-local.sql','r') as file:
+        sql_content=file.read()
+        for statement in sql_content.split(';'):
+            Connection.execute(statement)        
+
     return redirect(url_for('paddocks'))  
 
 @app.route("/nextday")
 def nextday():
-    start_date = datetime(2024, 10, 29).date()
-    if 'curr_date' not in session:
-        # session.update({'curr_date': start_date.strftime('%Y-%m-%d')})
-        current_date=start_date
-    else:
-        current_date = datetime.strptime(session['curr_date'], '%Y-%m-%d').date()
+    curr_date=get_date()
 
-    current_date=current_date+timedelta(days=1)
-    session.update({'curr_date': current_date.strftime('%Y-%m-%d')})
+    curr_date=curr_date+timedelta(days=1)
+    # session.update({'curr_date': curr_date.strftime('%Y-%m-%d')})
 
     Connection=getCursor()
     qstr="""
@@ -157,6 +163,14 @@ def nextday():
         Connection.execute(qstr,values)
         db_connection.commit()
 
+        qstr="""
+        UPDATE curr_date
+        SET curr_date=%s;
+        """
+        values=(curr_date,)
+        Connection.execute(qstr,values)
+        db_connection.commit()
+
     return redirect(url_for('paddocks'))  
 
 
@@ -172,8 +186,10 @@ def mobs():
     ORDER BY mobs.name;
     """
     connection.execute(qstr)        
-    mobs = connection.fetchall()        
-    return render_template("Mobs.html", mobs=mobs)  
+    mobs = connection.fetchall()   
+    curr_date=get_date()
+     
+    return render_template("Mobs.html", mobs=mobs,curr_date=curr_date)  
 
 
 @app.route("/paddocks")
@@ -209,7 +225,10 @@ def paddocks():
         new_paddock.append(days)
         updated_Paddocks.append(new_paddock)
 
-    return render_template("Paddocks.html",updated_Paddocks=updated_Paddocks)  
+    curr_date=get_date()
+
+
+    return render_template("Paddocks.html",updated_Paddocks=updated_Paddocks,curr_date=curr_date)  
 
 @app.route("/stock")
 def stock():
@@ -247,8 +266,9 @@ def stock():
     """
     connection.execute(qstr)        
     mobs = connection.fetchall()
+    curr_date=get_date()
 
-    return render_template("Stock.html",updated_stocks=updated_stocks,mobs=mobs)  
+    return render_template("Stock.html",updated_stocks=updated_stocks,mobs=mobs,curr_date=curr_date)  
 
 @app.route("/move_mob")
 def move_mob():
@@ -264,7 +284,9 @@ def move_mob():
     mobnpaddock = connection.fetchall()
     
     from_page=request.args.get('from')
-    return render_template("Move_Mob.html",from_page=from_page,mobnpaddock=mobnpaddock)  
+    curr_date=get_date()
+
+    return render_template("Move_Mob.html",from_page=from_page,mobnpaddock=mobnpaddock,curr_date=curr_date)  
 
 @app.route("/move_mob_submit",methods=['POST'])
 def move_mob_submit():
@@ -280,6 +302,8 @@ def move_mob_submit():
     connection.execute(qstr,values)
     db_connection.commit()        
     
+    curr_date=get_date()
+
     from_page = request.form.get('from_page')
     if from_page:
         return redirect(from_page)
@@ -288,7 +312,9 @@ def move_mob_submit():
     
 @app.route("/add_paddock")
 def add_paddock():
-    return render_template("Add_Paddock.html")  
+    curr_date=get_date()
+
+    return render_template("Add_Paddock.html",curr_date=curr_date)  
 
 @app.route("/add_paddock_submit",methods=['POST'])
 def add_paddock_submit ():
@@ -317,13 +343,14 @@ def delete_paddock ():
 
 @app.route("/edit_paddockk",methods=['GET'])
 def edit_paddock():
+    curr_date=get_date()
     id=request.args.get('id')    
     connection = getCursor()
     qstr="SELECT * FROM paddocks WHERE id=%s;"
     values=(id,)
     connection.execute(qstr,values)
     paddock_detail=connection.fetchone()
-    return render_template("Edit_Paddock.html",paddock_detail=paddock_detail)  
+    return render_template("Edit_Paddock.html",paddock_detail=paddock_detail,curr_date=curr_date)  
 
 @app.route("/edit_paddockk_submit",methods=['POST'])
 def edit_paddock_submit():
