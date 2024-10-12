@@ -322,7 +322,7 @@ def add_paddock_submit ():
     area=request.form.get('area')
     dm_ha=request.form.get('dm_ha')
     connection = getCursor()
-    total_dm=int(dm_ha)*int(area)
+    total_dm=float(dm_ha)*float(area)
     qstr="""INSERT INTO paddocks(name,dm_per_ha,area,total_dm)
     VALUES(%s,%s,%s,%s);
     """
