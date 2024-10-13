@@ -35,7 +35,7 @@ def getCursor():
 
 def get_date():
     Connection=getCursor()
-    qstr0="SELECT * FROM fms.curr_date;"
+    qstr0="SELECT * FROM curr_date;"
     Connection.execute(qstr0)
     curr_date=Connection.fetchone()[0]
     return curr_date
@@ -46,15 +46,15 @@ def home():
     curr_date=get_date()
 
     Connection=getCursor()  
-    qstr1="SELECT count(*) FROM fms.stock;"
-    qstr2="SELECT round(avg(weight),0) FROM fms.stock;"
+    qstr1="SELECT count(*) FROM stock;"
+    qstr2="SELECT round(avg(weight),0) FROM stock;"
     Connection.execute(qstr1)
     totalcows = Connection.fetchone()  
 
     Connection.execute(qstr2)        
     avgweight = Connection.fetchone() 
 
-    qstr3 ="SELECT * FROM fms.stock;"
+    qstr3 ="SELECT * FROM stock;"
     Connection.execute(qstr3)        
     stocks = Connection.fetchall()
     
@@ -80,7 +80,7 @@ def home():
 
 
     qstr4 = """
-    SELECT paddocks.id,paddocks.name,paddocks.area,paddocks.dm_per_ha,paddocks.total_dm,mobs.name AS mobname,mobs.id AS mobid,COUNT(stock.id) AS numofstock FROM fms.paddocks
+    SELECT paddocks.id,paddocks.name,paddocks.area,paddocks.dm_per_ha,paddocks.total_dm,mobs.name AS mobname,mobs.id AS mobid,COUNT(stock.id) AS numofstock FROM paddocks
     LEFT JOIN mobs on mobs.paddock_id=paddocks.id
     LEFT JOIN stock on mobs.id=stock.mob_id
     GROUP BY paddocks.id;
@@ -136,7 +136,7 @@ def nextday():
 
     Connection=getCursor()
     qstr="""
-    SELECT paddocks.id,paddocks.name,paddocks.area,paddocks.dm_per_ha,paddocks.total_dm,mobs.name AS mobname,mobs.id AS mobid,COUNT(stock.id) AS numofstock FROM fms.paddocks
+    SELECT paddocks.id,paddocks.name,paddocks.area,paddocks.dm_per_ha,paddocks.total_dm,mobs.name AS mobname,mobs.id AS mobid,COUNT(stock.id) AS numofstock FROM paddocks
     LEFT JOIN mobs on mobs.paddock_id=paddocks.id
     LEFT JOIN stock on mobs.id=stock.mob_id
     GROUP BY paddocks.id
@@ -179,7 +179,7 @@ def mobs():
     """List the mob details (excludes the stock in each mob)."""
     connection = getCursor()        
     qstr = """
-    SELECT paddocks.id,paddocks.name,paddocks.area,paddocks.dm_per_ha,paddocks.total_dm,mobs.name AS mobname,mobs.id AS mobid,COUNT(stock.id) AS numofstock FROM fms.paddocks
+    SELECT paddocks.id,paddocks.name,paddocks.area,paddocks.dm_per_ha,paddocks.total_dm,mobs.name AS mobname,mobs.id AS mobid,COUNT(stock.id) AS numofstock FROM paddocks
     LEFT JOIN mobs on mobs.paddock_id=paddocks.id
     LEFT JOIN stock on mobs.id=stock.mob_id
     GROUP BY paddocks.id
@@ -196,7 +196,7 @@ def mobs():
 def paddocks():
     connection = getCursor()        
     qstr = """
-    SELECT paddocks.id,paddocks.name,paddocks.area,paddocks.dm_per_ha,paddocks.total_dm,mobs.name AS mobname,mobs.id AS mobid,COUNT(stock.id) AS numofstock FROM fms.paddocks
+    SELECT paddocks.id,paddocks.name,paddocks.area,paddocks.dm_per_ha,paddocks.total_dm,mobs.name AS mobname,mobs.id AS mobid,COUNT(stock.id) AS numofstock FROM paddocks
     LEFT JOIN mobs on mobs.paddock_id=paddocks.id
     LEFT JOIN stock on mobs.id=stock.mob_id
     GROUP BY paddocks.id
@@ -257,7 +257,7 @@ def stock():
     connection = getCursor()        
     qstr ="""
     SELECT mobid,mobname,numofstock,paddocks.name AS paddockname,round(avgweight) FROM
-    (SELECT mobs.id AS mobid,mobs.name AS mobname,count(stock.id) AS numofstock,mobs.paddock_id AS paddockid,avg(stock.weight) AS avgweight FROM fms.stock
+    (SELECT mobs.id AS mobid,mobs.name AS mobname,count(stock.id) AS numofstock,mobs.paddock_id AS paddockid,avg(stock.weight) AS avgweight FROM stock
     INNER JOIN mobs ON mobs.id=stock.mob_id
     GROUP BY mobs.id) AS z
     LEFT JOIN paddocks ON paddockid=paddocks.id
@@ -274,7 +274,7 @@ def stock():
 def move_mob():
     connection = getCursor()        
     qstr="""
-    SELECT paddocks.id,paddocks.name,paddocks.area,paddocks.dm_per_ha,paddocks.total_dm,mobs.name AS mobname,mobs.id AS mobid,COUNT(stock.id) AS numofstock FROM fms.paddocks
+    SELECT paddocks.id,paddocks.name,paddocks.area,paddocks.dm_per_ha,paddocks.total_dm,mobs.name AS mobname,mobs.id AS mobid,COUNT(stock.id) AS numofstock FROM paddocks
     LEFT JOIN mobs on mobs.paddock_id=paddocks.id
     LEFT JOIN stock on mobs.id=stock.mob_id
     GROUP BY paddocks.id
