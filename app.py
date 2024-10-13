@@ -120,7 +120,7 @@ def clear_date():
 def reset_date():
     # session.update({'curr_date': start_date.strftime('%Y-%m-%d')})
     Connection=getCursor()  
-    with open('fmspa.sql','r') as file:
+    with open('/home/JunwenQiu1162541/fms/fmspa.sql','r') as file:
         sql_content=file.read()
         for statement in sql_content.split(';'):
             Connection.execute(statement)        
