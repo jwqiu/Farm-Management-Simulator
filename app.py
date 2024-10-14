@@ -189,7 +189,7 @@ def mobs():
     mobs = connection.fetchall()   
     curr_date=get_date()
      
-    return render_template("Mobs.html", mobs=mobs,curr_date=curr_date)  
+    return render_template("mobs.html", mobs=mobs,curr_date=curr_date)  
 
 
 @app.route("/paddocks")
@@ -228,7 +228,7 @@ def paddocks():
     curr_date=get_date()
 
 
-    return render_template("Paddocks.html",updated_Paddocks=updated_Paddocks,curr_date=curr_date)  
+    return render_template("paddocks.html",updated_Paddocks=updated_Paddocks,curr_date=curr_date)  
 
 @app.route("/stock")
 def stock():
@@ -268,7 +268,7 @@ def stock():
     mobs = connection.fetchall()
     curr_date=get_date()
 
-    return render_template("Stock.html",updated_stocks=updated_stocks,mobs=mobs,curr_date=curr_date)  
+    return render_template("stock.html",updated_stocks=updated_stocks,mobs=mobs,curr_date=curr_date)  
 
 @app.route("/move_mob")
 def move_mob():
@@ -286,7 +286,7 @@ def move_mob():
     from_page=request.args.get('from')
     curr_date=get_date()
 
-    return render_template("Move_Mob.html",from_page=from_page,mobnpaddock=mobnpaddock,curr_date=curr_date)  
+    return render_template("move_mob.html",from_page=from_page,mobnpaddock=mobnpaddock,curr_date=curr_date)  
 
 @app.route("/move_mob_submit",methods=['POST'])
 def move_mob_submit():
@@ -314,7 +314,7 @@ def move_mob_submit():
 def add_paddock():
     curr_date=get_date()
 
-    return render_template("Add_Paddock.html",curr_date=curr_date)  
+    return render_template("add_paddock.html",curr_date=curr_date)  
 
 @app.route("/add_paddock_submit",methods=['POST'])
 def add_paddock_submit ():
@@ -350,7 +350,7 @@ def edit_paddock():
     values=(id,)
     connection.execute(qstr,values)
     paddock_detail=connection.fetchone()
-    return render_template("Edit_Paddock.html",paddock_detail=paddock_detail,curr_date=curr_date)  
+    return render_template("edit_paddock.html",paddock_detail=paddock_detail,curr_date=curr_date)  
 
 @app.route("/edit_paddockk_submit",methods=['POST'])
 def edit_paddock_submit():
