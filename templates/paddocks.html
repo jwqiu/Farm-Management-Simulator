@@ -22,9 +22,12 @@
         <div class="text-start">
             <h2>Paddocks List</h2>
             <p class="lead text-muted">Current Paddocks and Management</p>
-            <a href="{{ url_for('add_paddock') }}" class="btn btn-success">Add New Paddock</a>
-            <a href="{{ url_for('nextday') }}" class="btn btn-success ms-3">Move to next day</a>
-            <a href="{{ url_for('reset_date') }}" class="ms-3">Clear date</a>
+            <div class="d-flex flex-wrap justify-content-start">
+                <a href="{{ url_for('add_paddock') }}" class="btn btn-success mb-2">Add New Paddock</a>
+                <a href="{{ url_for('nextday') }}" class="btn btn-success mb-2 ms-3">Move to next day</a>
+                <a href="{{ url_for('reset_date') }}" class="mt-1 ms-sm-3">Clear date</a>
+            </div>
+
 
         </div>
         <div class="mt-5 table-responsive">
