@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Edit Paddock{% endblock %}
+{% block title %}Add Paddock{% endblock %}
 
 {% block header %}
 <section id="breadcrumb" class="bg-white">
@@ -9,7 +9,7 @@
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="/">Home</a></li>
               <li class="breadcrumb-item"><a href="/paddocks">Paddocks List</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Edit Paddock</li>
+              <li class="breadcrumb-item active" aria-current="page">Add Paddock</li>
             </ol>
         </nav>
     </div>
@@ -20,35 +20,33 @@
 <section id="table" class="bg-light">
     <div class="container col-10 col-md-8 py-5">
         <!-- <form class="text-start" > -->
-            <h2>Edit Paddock</h2>
-            <p class="lead text-muted">Edit a current paddock in your farm</p>
+            <h2>Add Paddock</h2>
+            <p class="lead text-muted">Add a new paddock in your farm</p>
             <div class="bg-white p-5 mb-5">
                 <div class="row">
                     <div>
-                        <form class="d-flex flex-column needs-validation" novalidate method="POST" action="{{url_for('edit_paddock_submit')}}">
-                            <input type="hidden" id="paddock_id" name="paddock_id" value="{{paddock_detail[0]}}">
-
+                        <form class="d-flex flex-column needs-validation" novalidate method="POST" action="{{url_for('add_paddock_submit')}}">
                             <div>
                                 <label for="paddock_name" class="form-label">Paddock Name</label>
-                                <input type="text" class="form-control" id="paddock_name" name="paddock_name" value="{{paddock_detail[1]}}" minlength="3" required>
+                                <input type="text" class="form-control" name="paddock_name" id="paddock_name" minlength="3" required>
                                 <div class="invalid-feedback">Please provide a paddock name with at least 3 letters</div>
                                 <div class="valid-feedback">Looks good!</div>
                             </div>
 
                             <div>
                                 <label for="area" class="form-label mt-5">Area</label>
-                                <input type="number" class="form-control" id="area" name="area" value="{{paddock_detail[2]}}" min="0.1" max="9999" step="0.01" required>
+                                <input type="number" class="form-control" name="area" id="area" min="0.1" max="9999" step="0.01" required>
                                 <div class="invalid-feedback">Please specify the area,within the range from 0.1 to 9999.</div>
                                 <div class="valid-feedback">Looks good!</div>
                             </div>
 
                             <div>
                                 <label for="dm_ha" class="form-label mt-5">dm/ha</label>
-                                <input type="number" class="form-control " id="dm_ha" name="dm_ha" value="{{paddock_detail[3]}}" min="0.1" max="9999" step="0.01" required>
-                                <div class="invalid-feedback">Please specify the area,within the range from 0.1 to 9999.</div>
+                                <input type="number" class="form-control " name="dm_ha" id="dm_ha" min="0.1" max="9999" step="0.01" required>
+                                <div class="invalid-feedback">Please specify the dm/h,within the range from 0.1 to 9999.</div>
                                 <div class="valid-feedback">Looks good!</div>
                             </div>
-                            
+
                             <div>
                                 <button class="btn btn-success mt-5">Submit</button>
                             </div>
