@@ -1,3 +1,4 @@
+
 # Design decisions
 
 In this part, I want to talk about some features and functions I planned to make before developing this web application. For those features, I changed my mind during the development of this web application. I will talk more details, like my original plan and the reason why I changed it.
@@ -77,3 +78,5 @@ VALUES('FarmofHope','a quite small farm that was set up by a young couple with a
 ## Question 5: What changes would you need to make to other tables to incorporate the new farms table? (Describe the changes. SQL script not required.)
 
 You didn't mention what the other tables are, so I assume 'other tables' means the paddocks, mobs, and stocks tables I used in this assessment,if i have the new farm tables, in order to link all these tables with the new farm tables, i need to add the farm_id as a foreign key to these talbe, so i can check which farm a certain stock/mob/stock is  in.
+
+Contribution test
