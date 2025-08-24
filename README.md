@@ -79,4 +79,4 @@ VALUES('FarmofHope','a quite small farm that was set up by a young couple with a
 
 You didn't mention what the other tables are, so I assume 'other tables' means the paddocks, mobs, and stocks tables I used in this assessment,if i have the new farm tables, in order to link all these tables with the new farm tables, i need to add the farm_id as a foreign key to these talbe, so i can check which farm a certain stock/mob/stock is  in.
 
-test
+test contribution
